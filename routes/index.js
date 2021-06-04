@@ -29,3 +29,8 @@ function prepare(){
 	});
 
 }
+
+
+router.get('/', function(req, res, next) {
+    res.render('index', { title: 'Service Nmap'});
+});
