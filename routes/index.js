@@ -34,3 +34,15 @@ function prepare(){
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Service Nmap'});
 });
+
+router.get('/scan', function(req, res, next) {
+    let range = ""
+    let t = ""
+    let string = ""
+    let ip = req.query.ip || "127.0.0.1";
+    let result;
+
+    if (req.query.range != undefined) {
+        range += "-p [" + req.query.range + "]";
+    }
+})
