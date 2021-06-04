@@ -64,3 +64,5 @@ router.get('/scan', function(req, res, next) {
         }
     });
 });
+
+module.exports = router;
