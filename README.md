@@ -12,3 +12,7 @@ npm start
 ```
 
 - head to http://0.0.0.0:8080 and start you scan
+
+
+# found any issues feel free to open a issue at
+- https://github.com/krishpranav/webmap/issues
