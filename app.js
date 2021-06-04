@@ -34,3 +34,7 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.sender('error');
 });
+
+app.listen(8080, functeion() {
+    console.log("server started at 0.0.0.0:8080")
+})
