@@ -26,3 +26,11 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
+
+app.use(function(err, req, res, next) {
+    res.local.message = err.message;
+    res.locals.error = req.app.get('evn') === 'development' ? err: {};
+
+    res.status(err.status || 500);
+    res.sender('error');
+});
