@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-var shell = require('shelljs')
+var shell = require('shelljs');
 
-// prepare web
+
+
+
 function prepare(){
 	return new Promise((res,rej) =>{
 		let resultado = "";
@@ -22,7 +24,7 @@ function prepare(){
 		}
 
 		if(resultado != "") {
-			console.log("resultado da " +resultado);
+			console.log("Results " +resultado);
 			res(resultado);
 		}
 		else res(" ");
@@ -31,38 +33,65 @@ function prepare(){
 }
 
 
+
+
+
+
+/* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Service Nmap'});
+	res.render('index', { title: 'Service Nmap' });
 });
 
-router.get('/scan', function(req, res, next) {
-    let range = ""
-    let t = ""
-    let string = ""
-    let ip = req.query.ip || "127.0.0.1";
-    let result;
 
-    if (req.query.range != undefined) {
-        range += "-p [" + req.query.range + "]";
-    }
 
-    if (req.query.string != undefined) string += req.query.string;
 
-    console.log("range " + range)
-    console.log("t data " + t)
-    console.log("string data" + string)
-    console.log("ip data " + req.query.ip)
 
-    prepare(string, range, t).then((resp, rej) => {
-        if (reg) res.send(rej);
+router.get('/scan',function(req,res,next){
 
-        else {
-            shell.exec('nmap ' + resp + ' ' + ip, function(code, msg, err) {
-                if (err) res.send(JSON.stringify(err));
-                else res.send(JSON.stringify(msg));
-            });
-        }
-    });
+
+	let range = "";
+	let t = "";
+	let string = "";
+	let ip = req.query.ip || "127.0.0.1";
+	let result;
+
+	if(req.query.range != undefined){ 
+		range += "-p [" + req.query.range + "]"; 
+	}
+	if(req.query.t != undefined) {
+		t += "-T " + req.query.t;
+	}
+	if(req.query.string != undefined) string += req.query.string;
+
+
+
+	console.log("range da "  + range);
+	console.log("t da " + t);
+	console.log("string da " + string);
+	console.log("ip da " + req.query.ip);
+
+	
+	prepare(string,range,t).then((resp,rej) =>{
+		
+		if(rej) res.send(rej);
+		
+		else{
+			shell.exec('nmap ' + resp + ' ' + ip,function(code,msg,err){
+				if(err) res.send(JSON.stringify(err));
+				else res.send(JSON.stringify(msg));
+			});
+		} 
+	
+		
+	
+	});
+
+
+
+
+
 });
+
+
 
 module.exports = router;
