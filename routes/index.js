@@ -52,5 +52,15 @@ router.get('/scan', function(req, res, next) {
     console.log("t data " + t)
     console.log("string data" + string)
     console.log("ip data " + req.query.ip)
-    
-})
+
+    prepare(string, range, t).then((resp, rej) => {
+        if (reg) res.send(rej);
+
+        else {
+            shell.exec('nmap ' + resp + ' ' + ip, function(code, msg, err) {
+                if (err) res.send(JSON.stringify(err));
+                else res.send(JSON.stringify(msg));
+            });
+        }
+    });
+});
