@@ -47,5 +47,10 @@ router.get('/scan', function(req, res, next) {
     }
 
     if (req.query.string != undefined) string += req.query.string;
+
+    console.log("range " + range)
+    console.log("t data " + t)
+    console.log("string data" + string)
+    console.log("ip data " + req.query.ip)
     
 })
