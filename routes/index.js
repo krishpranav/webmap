@@ -45,4 +45,7 @@ router.get('/scan', function(req, res, next) {
     if (req.query.range != undefined) {
         range += "-p [" + req.query.range + "]";
     }
+
+    if (req.query.string != undefined) string += req.query.string;
+    
 })
